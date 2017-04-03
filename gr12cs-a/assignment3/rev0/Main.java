@@ -19,7 +19,7 @@ public class Main {
     
     public static void makeObjects () throws FileNotFoundException {
         Scanner fileInput = new Scanner (new File ("input.txt"));
-        
+       
         for (int j = 0; fileInput.hasNextLine(); j++) {
             String currLine = fileInput.nextLine();
             currLine.trim();
