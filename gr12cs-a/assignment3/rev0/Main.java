@@ -8,6 +8,8 @@ public class Main {
     private static String name = "";
     private static int rememberThis = 0;
     
+    //this should be here now
+    
     public static void main (String [] args) throws FileNotFoundException {
         System.out.println("Processing...");
         makeObjects();  
