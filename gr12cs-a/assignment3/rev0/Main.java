@@ -7,7 +7,7 @@ public class Main {
     private static String categ = "";
     private static String name = "";
     private static int rememberThis = 0;
-        
+    
     public static void main (String [] args) throws FileNotFoundException {
         System.out.println("Processing...");
         makeObjects();  
