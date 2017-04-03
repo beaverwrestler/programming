@@ -10,7 +10,9 @@ public class Main {
     
     public static void main (String [] args) throws FileNotFoundException {
         System.out.println("Processing...");
-        makeObjects();  
+        makeObjects();
+
+        //this comment was made in IntelliJ
         
         System.out.println(name);
         System.out.println(categ);
