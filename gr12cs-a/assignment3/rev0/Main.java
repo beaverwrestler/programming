@@ -13,7 +13,6 @@ public class Main {
             //ask what they want to seach
             //display info
             //keep looping unitl usr inputs exit OR press any key after to return to main menu
-    //hello!!
     
     public static void main (String [] args) throws FileNotFoundException {
         System.out.println("Processing...");
@@ -52,11 +51,6 @@ public class Main {
                         categ = test;
                     else 
                         name += test + " "; 
-                }
-
-                if (false){
-                    //this is just a test;
-                    System.out.println("blahg");
                 }
                 
                 name = name.trim();
