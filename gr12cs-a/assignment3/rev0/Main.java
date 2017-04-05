@@ -24,8 +24,7 @@ public class Main {
         
         while (crit != 'r' || crit != 'g' || crit != 'n') {
             System.out.println("What would you like to search by? (r = rating, g = genre, n = name)");
-            crit = readInp.next((();
-            
+            crit = readInp.next().charAt(0);
         }
     }
     
@@ -35,25 +34,36 @@ public class Main {
         while (fileInput.hasNextLine()) {
             String currLine = fileInput.nextLine();
             StringTokenizer counter = new StringTokenizer (currLine, "% ");
-            try {
-                rating = Double.parseDouble (counter.nextToken());   
-            }
-            catch (NumberFormatException e) {
+            if (counter.countTokens()<3)
                 System.out.println("There seems to be a problem with this line of input, going to next line");
-                break;
-            }
+            else {
+                try {
+                    rating = Double.parseDouble (counter.nextToken());   
+                }
+                catch (NumberFormatException e) {
+                    System.out.println("There seems to be a problem with this line of input, going to next line");
+                    break;
+                }
             
-            while (counter.hasMoreTokens()) {
-                String test = counter.nextToken();
-                if (counter.hasMoreTokens() == false)
-                    categ = test;
-                else 
-                    name += test + " "; 
+                while (counter.hasMoreTokens()) {
+                    String test = counter.nextToken();
+                    if (counter.hasMoreTokens() == false)
+                        categ = test;
+                    else 
+                        name += test + " "; 
+                }
+                
+                name = name.trim();
+                categ = categ.trim();
+                
+                System.out.println(name + " " + rating + " " + categ);
+                film.add(new Movie (name, categ, rating)); 
+                
+                name = "";
+                categ = "";
+                rating = 0.0;
             }
-            
-            film.add(new Movie (name, categ, rating));            
-        } 
-        
+        }    
         fileInput.close();
     }
 }
