@@ -28,7 +28,7 @@ public class Main {
         }
     }
     
-    public static void makeObjects () throws FileNotFoundException {
+    private static void makeObjects () throws FileNotFoundException {
         Scanner fileInput = new Scanner (new File ("input.txt"));
        
         while (fileInput.hasNextLine()) {
@@ -47,7 +47,7 @@ public class Main {
             
                 while (counter.hasMoreTokens()) {
                     String test = counter.nextToken();
-                    if (counter.hasMoreTokens() == false)
+                    if (!counter.hasMoreTokens())
                         categ = test;
                     else 
                         name += test + " "; 
