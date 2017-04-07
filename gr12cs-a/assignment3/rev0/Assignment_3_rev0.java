@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class Assignment_3_rev0 {
   
     private static double rating = 0;
     private static String categ = "";
