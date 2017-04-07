@@ -17,21 +17,20 @@ public class Assignment_3_rev0 {
         String usrInp = readInp.readLine();            
         usrInp.toUpperCase();
         
-        while (!usrInp.equals("exit")) {
+        while (!usrInp.equalsIgnoreCase("EXIT")) {
             //right now, this just assumes the criteria will be genre
             System.out.println("Searching...");
-            
-            
-            
-            System.out.println("Enter the name or genre you'd like to search by: ");
+            System.out.println("Enter the name or genre you'd like to search by (or, exit to stop): ");
             usrInp = readInp.readLine();
-            usrInp.toUpperCase();
+            
+            Arrays.sort (film, new Compare());
+            
         }
     }
     
     private static void makeObjects () throws FileNotFoundException {
         Scanner fileInput = new Scanner (new File ("input.txt"));
-       
+        
         while (fileInput.hasNextLine()) {
             String currLine = fileInput.nextLine();
             StringTokenizer counter = new StringTokenizer (currLine, "% ");
@@ -40,6 +39,9 @@ public class Assignment_3_rev0 {
             else {
                 try {
                     rating = Double.parseDouble (counter.nextToken());   
+                    rating *=10;
+                    rating = Math.round(rating);
+                    rating/=10;
                 }
                 catch (NumberFormatException e) {
                     System.out.println("There seems to be a problem with this line of input, going to next line");
