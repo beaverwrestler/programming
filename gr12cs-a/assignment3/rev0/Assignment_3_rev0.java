@@ -2,29 +2,30 @@ import java.io.*;
 import java.util.*;
 
 public class Assignment_3_rev0 {
-  
     private static double rating = 0;
     private static String categ = "";
     private static String name = "";
     private static int rememberThis = 0;
     private static ArrayList <Movie> film = new ArrayList();
- 
-            //ask user what they want to search by
-            //ask what they want to seach
-            //display info
-            //keep looping unitl usr inputs exit OR press any key after to return to main menu
     
-    public static void main (String [] args) throws FileNotFoundException {
+    public static void main (String [] args) throws FileNotFoundException, IOException {
         System.out.println("Processing...");
         makeObjects();   
+                        
+        BufferedReader readInp = new BufferedReader (new InputStreamReader (System.in));
+        System.out.println("Enter the name or genre you'd like to search by: ");
+        String usrInp = readInp.readLine();            
+        usrInp.toUpperCase();
         
-        Scanner readInp = new Scanner (System.in);
-        
-        char crit = ' ';
-        
-        while (crit != 'r' || crit != 'g' || crit != 'n') {
-            System.out.println("What would you like to search by? (r = rating, g = genre, n = name)");
-            crit = readInp.next().charAt(0);
+        while (!usrInp.equals("exit")) {
+            //right now, this just assumes the criteria will be genre
+            System.out.println("Searching...");
+            
+            
+            
+            System.out.println("Enter the name or genre you'd like to search by: ");
+            usrInp = readInp.readLine();
+            usrInp.toUpperCase();
         }
     }
     
@@ -55,8 +56,6 @@ public class Assignment_3_rev0 {
                 
                 name = name.trim();
                 categ = categ.trim();
-                
-                System.out.println(name + " " + rating + " " + categ);
                 film.add(new Movie (name, categ, rating)); 
                 
                 name = "";
