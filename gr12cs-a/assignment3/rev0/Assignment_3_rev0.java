@@ -39,9 +39,9 @@ public class Assignment_3_rev0 {
             else {
                 try {
                     rating = Double.parseDouble (counter.nextToken());   
-                    rating *=10;
-                    rating = Math.round(rating);
-                    rating/=10;
+                    //rating *=10;
+                    rating = Math.round(rating*10)/10;
+                    //rating/=10;
                 }
                 catch (NumberFormatException e) {
                     System.out.println("There seems to be a problem with this line of input, going to next line");
