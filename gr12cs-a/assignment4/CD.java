@@ -5,9 +5,19 @@ public class CD {
         //constructor
     }
     
-    public int cdLength (ArrayList <Song> songs) {
+    public int cdLength () {
         //more 
     }
     
-    public void commonSongs ()
+    public void commonSongs () {
+        //blah
+    }
+    
+    public void listSongs () {
+        //asd
+    }
+    
+    public void removeSong (String title, int num) {
+        //asd
+    }
 }

@@ -3,8 +3,7 @@ import java.io.*;
 public class Driver {
     private static ArrayList <CD> cds = new ArrayList();
 
-    public static int displayMenu (int menuNum, BufferedReader stdIn) throws IOException
-    {
+    public static int displayMenu (int menuNum, BufferedReader stdIn) throws IOException {
     	if (menuNum == 0) {
 	        System.out.println ("----------  MAIN MENU  -----------");
 	        System.out.println ("1) Accessing your list of CDs");
