@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.*;
 
 public class Driver {
     private static ArrayList <CD> cds = new ArrayList();
@@ -32,12 +33,16 @@ public class Driver {
     	    System.out.println ("6) Return back to main menu");
     	    System.out.println ("----------------------------------");
     	}
-
 	    System.out.print ("\n\nPlease enter your choice:  ");
-        
-	    int choice = Integer.parseInt (stdIn.readLine ());
+	    try {
+            int choice = Integer.parseInt (stdIn.readLine ());
+            return choice;
 
-	    return choice;
+        }
+        catch (NumberFormatException e) {
+            System.out.println("Invalid Input, try again...");
+        }
+        return -1;
     }
 
     public static void main (String[] args) throws IOException {

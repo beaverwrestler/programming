@@ -11,8 +11,10 @@ public class Time {
     } 
     
     //getters
-    public int getMins () 
+    public int getMins () {
         return mins;
-    public int getSecs () 
+    }
+    public int getSecs () {
         return secs;
+    }
 }

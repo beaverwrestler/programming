@@ -8,6 +8,6 @@ public class Song {
         this.name = name;
         this.genre = genre;
         this.rating = rating;
-        totalTime = time;
+        totalTime = Time time;
     }
 }

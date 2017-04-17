@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class CD {
     private ArrayList <Song> songs = new ArrayList();
     private String title;
@@ -8,19 +10,13 @@ public class CD {
         this.numSongs = numSongs;
     }
     
-    public int cdLength () {
-        //more 
+    public int cdLength () {    
+        return -1;
     }
     
-    public void commonSongs () {
-        //blah
-    }
+    public void commonSongs () {    }
     
-    public void listSongs () {
-        //blahh
-    }
+    public void listSongs () {    }
     
-    public void removeSong (String title, int num) {
-        //blahhhh
-    }
+    public void removeSong (String title, int num) {    }
 }
