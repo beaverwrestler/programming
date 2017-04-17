@@ -34,25 +34,35 @@ public class Driver {
     	    System.out.println ("----------------------------------");
     	}
 	    System.out.print ("\n\nPlease enter your choice:  ");
+        
 	    try {
             int choice = Integer.parseInt (stdIn.readLine ());
+            if (menuNum == 0 && choice>3)
+                throw new NumberFormatException ();
+            else if (menuNum ==1 && choice > 7)
+                throw new NumberFormatException ();
+            else if (choice >6)
+                throw new NumberFormatException ();
             return choice;
-
         }
         catch (NumberFormatException e) {
-            System.out.println("Invalid Input, try again...");
+            System.out.println("\nInvalid Input, try again...");
+            return displayMenu (menuNum, stdIn);
         }
-        return -1;
+        catch (Exception e) {
+            System.out.println("hehe, I don't know how this happened");
+            return -1;
+        }
     }
 
     public static void main (String[] args) throws IOException {
     	BufferedReader stdIn = new BufferedReader (new InputStreamReader (System.in));
-    	int mainMenuChoice, subMenuChoice;
-    	mainMenuChoice = displayMenu (0, stdIn);
+    	int mainChoice, subChoice;
+    	mainChoice = displayMenu (0, stdIn);
 
-    	if (mainMenuChoice == 1)
-    	    subMenuChoice = displayMenu (1, stdIn);
-    	else if (mainMenuChoice == 2)
-    	    subMenuChoice = displayMenu (2, stdIn);
+    	if (mainChoice == 1)
+    	    subChoice = displayMenu (1, stdIn);
+    	else if (mainChoice == 2)
+    	    subChoice = displayMenu (2, stdIn);
     }
 }
