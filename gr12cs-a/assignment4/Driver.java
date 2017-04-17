@@ -1,5 +1,6 @@
 /* Name: Artin Sarkezians   
- * Assignemnt: The one with the cds
+ * Due Date: Today
+ * Assignment: the one with the cd's
 */ 
 
 import java.io.*;
@@ -26,7 +27,10 @@ public class Driver {
             
             if (mainChoice == 1) {
                 if (subChoice == 1) {
-                    //print the entire list of cds
+                    System.out.println("\nCDs currently in memory: ");
+                    for (int i = 0; i < cds.size(); i ++) 
+                        System.out.println(cds.get(i));
+                    System.out.println();
                 }
                 if (subChoice == 2) {
                     //add list to list of cds
@@ -37,7 +41,7 @@ public class Driver {
                 if (subChoice ==1) {
                     //list all names of songs in a cd
                 }
-            }
+            }          
             
             System.out.println ("Would you like to continue? (y/n)");
             contin = stdIn.readLine();
@@ -103,7 +107,7 @@ public class Driver {
         String cdName = inp.readLine();
         int numSongs = Integer.parseInt(inp.readLine());
         CD cd = new CD (cdName, numSongs);
-        cds.add(cd);    //creates cd
+        cds.add(cd);    //adds cd to arrayList
         
         for (int i = 0; i < numSongs; i ++) {            
             String title = inp.readLine();

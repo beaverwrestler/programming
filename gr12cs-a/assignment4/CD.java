@@ -24,4 +24,8 @@ public class CD {
     public void listSongs () {    }
     
     public void removeSong (String title, int num) {    }
+    
+    public String toString () {
+        return title;
+    }
 }
