@@ -1,13 +1,13 @@
 public class Song {
     private String title, name, genre;    //variables
     private int rating;
-    Time totalTime;
+    Time duration;
 
-    public Song (String title, String name, String genre, int rating, Object time) {        //constructor
+    public Song (String title, String name, String genre, int rating, Time duration) {        //constructor
         this.title = title;
         this.name = name;
         this.genre = genre;
         this.rating = rating;
-        totalTime = Time time;
+        this.duration = duration;
     }
 }

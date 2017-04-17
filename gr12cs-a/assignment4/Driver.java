@@ -1,9 +1,52 @@
+/* Name: Artin Sarkezians   
+ * Assignemnt: The one with the cds
+*/ 
+
 import java.io.*;
 import java.util.*;
 
 public class Driver {
     private static ArrayList <CD> cds = new ArrayList();
 
+    public static void main (String[] args) throws IOException {
+    	BufferedReader stdIn = new BufferedReader (new InputStreamReader (System.in));
+        importCDs();
+        String contin = "";
+        
+        do {        
+        	int mainChoice, subChoice;
+        	mainChoice = displayMenu (0, stdIn);
+            
+        	if (mainChoice == 1)
+        	    subChoice = displayMenu (1, stdIn);
+        	else if (mainChoice == 2)
+        	    subChoice = displayMenu (2, stdIn);
+            else 
+                break;
+            
+            if (mainChoice == 1) {
+                if (subChoice == 1) {
+                    //print the entire list of cds
+                }
+                if (subChoice == 2) {
+                    //add list to list of cds
+                }
+            }
+        
+            else if (mainChoice == 2) {
+                if (subChoice ==1) {
+                    //list all names of songs in a cd
+                }
+            }
+            
+            System.out.println ("Would you like to continue? (y/n)");
+            contin = stdIn.readLine();
+        } while (contin.equals("y"));
+        
+        stdIn.close();
+        System.out.println("Thank you and have a terrrible day");
+    }
+    
     public static int displayMenu (int menuNum, BufferedReader stdIn) throws IOException {
     	if (menuNum == 0) {
 	        System.out.println ("----------  MAIN MENU  -----------");
@@ -54,15 +97,22 @@ public class Driver {
             return -1;
         }
     }
-
-    public static void main (String[] args) throws IOException {
-    	BufferedReader stdIn = new BufferedReader (new InputStreamReader (System.in));
-    	int mainChoice, subChoice;
-    	mainChoice = displayMenu (0, stdIn);
-
-    	if (mainChoice == 1)
-    	    subChoice = displayMenu (1, stdIn);
-    	else if (mainChoice == 2)
-    	    subChoice = displayMenu (2, stdIn);
+    
+    public static void importCDs () throws IOException {
+        BufferedReader inp = new BufferedReader (new FileReader ("Millenium.txt"));
+        String cdName = inp.readLine();
+        int numSongs = Integer.parseInt(inp.readLine());
+        CD cd = new CD (cdName, numSongs);
+        cds.add(cd);    //creates cd
+        
+        for (int i = 0; i < numSongs; i ++) {            
+            String title = inp.readLine();
+            String name = inp.readLine();
+            String genre = inp.readLine();
+            int rating = Integer.parseInt(inp.readLine());
+            String length = inp.readLine();
+            
+            cd.addSong(title, name, genre, rating, length);
+        }
     }
 }

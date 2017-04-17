@@ -10,6 +10,11 @@ public class CD {
         this.numSongs = numSongs;
     }
     
+    public void addSong (String title, String name, String genre, int rating, String length) {
+        Time duration = new Time (length);
+        songs.add(new Song(title, name, genre, rating, duration));
+    }
+    
     public int cdLength () {    
         return -1;
     }
