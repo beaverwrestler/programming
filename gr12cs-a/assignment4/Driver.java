@@ -38,10 +38,10 @@ public class Driver {
                 if (subChoice == 2) {
                     while (fileFound == false) {
                         System.out.println("Please enter the name of the file/CD you'd like to load into memory: ");
-                        String name = stdIn.readLine().toLowerCase();
+                        String name = stdIn.readLine();
                         if (name.equals("exit"))
                             break;
-                        fileFound = importCDs(name);    
+                        importCDs(name);    
                     }   
                 }
             }
@@ -50,7 +50,7 @@ public class Driver {
                String cdName = "";
                while ((cdName.equals("") || cdName == null)) {
                    System.out.println("Please enter the name of the CD you'd like to access (exit to cancel): ");
-                   cdName = stdIn.readLine().toLowerCase(); 
+                   cdName = stdIn.readLine(); 
                    if (cdName.equals("exit")){
                        break;
                    }
@@ -128,7 +128,7 @@ public class Driver {
         }
     }
     
-    public static boolean importCDs (String fileName) {
+    public static void importCDs (String fileName) {
         try {
             BufferedReader inp = new BufferedReader (new FileReader (fileName));
             String cdName = inp.readLine();
@@ -146,7 +146,6 @@ public class Driver {
             }
             
             Collections.sort(cds, new compareCD());
-            return true;
         }
         catch (FileNotFoundException e) {
             System.out.println("That file was not found, was there a typo?");
@@ -154,6 +153,5 @@ public class Driver {
         catch (Exception e) {
             System.out.println("Something bad went wrong, weally bad...");
         }
-        return false;
     }
 }
