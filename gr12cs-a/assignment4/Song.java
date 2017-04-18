@@ -10,4 +10,8 @@ public class Song {
         this.rating = rating;
         this.duration = duration;
     }
+    
+    public String toString () {
+        return title;
+    }
 }

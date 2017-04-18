@@ -21,11 +21,24 @@ public class CD {
     
     public void commonSongs () {    }
     
-    public void listSongs () {    }
+    public void listSongs () {
+        for (int i = 0; i < songs.size(); i ++) 
+            System.out.println(songs.get(i));
+    }
     
     public void removeSong (String title, int num) {    }
     
     public String toString () {
         return title;
+    }
+    
+    public String getTitle () {
+        return title;
+    }
+}
+
+class compareCD implements Comparator<CD> {      //comparator to organise by title
+    public int compare (CD m, CD m1){
+        return m.getTitle().compareToIgnoreCase(m1.getTitle());
     }
 }

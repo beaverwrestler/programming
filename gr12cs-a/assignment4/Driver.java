@@ -11,7 +11,7 @@ public class Driver {
 
     public static void main (String[] args) throws IOException {
     	BufferedReader stdIn = new BufferedReader (new InputStreamReader (System.in));
-        importCDs();
+        importCDs("Millenium.txt");
         String contin = "";
         
         do {        
@@ -33,19 +33,28 @@ public class Driver {
                     System.out.println();
                 }
                 if (subChoice == 2) {
-                    //add list to list of cds
+                    System.out.println("Please enter the name of the file/CD you'd like to load into memory: ");
+                    String name = stdIn.readLine();
+                    importCDs(name);
                 }
             }
         
             else if (mainChoice == 2) {
+                System.out.println("Please enter the name of the CD you'd like to access: ");
+                String cdName = stdIn.readLine(); 
                 if (subChoice ==1) {
-                    //list all names of songs in a cd
+                    int found = Collections.binarySearch(cds, new CD (cdName, 0), new compareCD());
+                    if (found < 0)
+                        System.out.println("not found");
+                    else 
+                        cds.get(found).listSongs();   
                 }
             }          
-            
-            System.out.println ("Would you like to continue? (y/n)");
-            contin = stdIn.readLine();
-        } while (contin.equals("y"));
+            while (!contin.equals("y") && !contin.equals("yes") && !contin.equals("n") && !contin.equals("no")) {
+                System.out.println ("Would you like to continue? (y/n)");
+                contin = stdIn.readLine();
+            }
+        } while (contin.equals("y") || contin.equals("yes"));
         
         stdIn.close();
         System.out.println("Thank you and have a terrrible day");
@@ -102,21 +111,30 @@ public class Driver {
         }
     }
     
-    public static void importCDs () throws IOException {
-        BufferedReader inp = new BufferedReader (new FileReader ("Millenium.txt"));
-        String cdName = inp.readLine();
-        int numSongs = Integer.parseInt(inp.readLine());
-        CD cd = new CD (cdName, numSongs);
-        cds.add(cd);    //adds cd to arrayList
-        
-        for (int i = 0; i < numSongs; i ++) {            
-            String title = inp.readLine();
-            String name = inp.readLine();
-            String genre = inp.readLine();
-            int rating = Integer.parseInt(inp.readLine());
-            String length = inp.readLine();
+    public static void importCDs (String fileName) {
+        try {
+            BufferedReader inp = new BufferedReader (new FileReader (fileName));
+            String cdName = inp.readLine();
+            int numSongs = Integer.parseInt(inp.readLine());
+            CD cd = new CD (cdName, numSongs);
+            cds.add(cd);    //adds cd to arrayList
             
-            cd.addSong(title, name, genre, rating, length);
+            for (int i = 0; i < numSongs; i++) {            
+                String title = inp.readLine();
+                String name = inp.readLine();
+                String genre = inp.readLine();
+                int rating = Integer.parseInt(inp.readLine());
+                String length = inp.readLine();
+                cd.addSong(title, name, genre, rating, length);
+            }
+            
+            Collections.sort(cds, new compareCD());
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("That file was not found, was there a typo?");
+        }
+        catch (Exception e) {
+            System.out.println("Something bad went wrong, weally bad...");
         }
     }
 }
