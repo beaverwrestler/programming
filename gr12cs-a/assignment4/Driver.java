@@ -51,9 +51,8 @@ public class Driver {
                while ((cdName.equals("") || cdName == null)) {
                    System.out.println("Please enter the name of the CD you'd like to access (exit to cancel): ");
                    cdName = stdIn.readLine(); 
-                   if (cdName.equals("exit")){
+                   if (cdName.equals("exit"))
                        break;
-                   }
                    if (subChoice ==1) {
                        int found = Collections.binarySearch(cds, new CD (cdName, 0), new compareCD());
                        if (found < 0) {
@@ -62,7 +61,7 @@ public class Driver {
                        }
                        else {
                            cds.get(found).listSongs();   
-                            break;
+                           break;
                        }
                    }
                }
@@ -72,7 +71,6 @@ public class Driver {
                 contin = stdIn.readLine().toLowerCase();
             }
         } while (contin.equals("y") || contin.equals("yes"));
-        
         stdIn.close();
         System.out.println("Thank you and have a terrrible day");
     }
