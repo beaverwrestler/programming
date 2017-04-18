@@ -1,9 +1,9 @@
 public class Song {
     private String title, name, genre;    //variables
-    private int rating;
+    private double rating;
     Time duration;
 
-    public Song (String title, String name, String genre, int rating, Time duration) {        //constructor
+    public Song (String title, String name, String genre, double rating, Time duration) {        //constructor
         this.title = title;
         this.name = name;
         this.genre = genre;

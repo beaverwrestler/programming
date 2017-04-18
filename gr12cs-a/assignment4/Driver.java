@@ -8,17 +8,16 @@ import java.util.*;
 
 public class Driver {
     private static ArrayList <CD> cds = new ArrayList();
-    private static boolean fileFound = true;
-
+    private static ArrayList <String> cdEnglish = new ArrayList();
+    
     public static void main (String[] args) throws IOException {
     	BufferedReader stdIn = new BufferedReader (new InputStreamReader (System.in));
         importCDs("Millenium.txt");
-        fileFound = false;
         String contin = "";
-        boolean cont = false;
         
         do {        
         	int mainChoice, subChoice;
+            contin = "";
         	mainChoice = displayMenu (0, stdIn);
             
         	if (mainChoice == 1)
@@ -29,47 +28,57 @@ public class Driver {
                 break;
             
             if (mainChoice == 1) {
-                if (subChoice == 1) {
+                if (subChoice == 1) {        //this is also fine
                     System.out.println("\nCDs currently in memory: ");
                     for (int i = 0; i < cds.size(); i ++) 
                         System.out.println(cds.get(i));
                     System.out.println();
                 }
-                if (subChoice == 2) {
-                    while (fileFound == false) {
-                        System.out.println("Please enter the name of the file/CD you'd like to load into memory: ");
+                else if (subChoice == 3) {        //this is fine
+                    while (true) {
+                        System.out.println("Please enter the name of the file/CD you'd like to load into memory (exit to cancel): ");
                         String name = stdIn.readLine();
                         if (name.equals("exit"))
                             break;
                         importCDs(name);    
                     }   
                 }
+                else if (subChoice == 2) {    }
+                else if (subChoice == 4) {    }
+                else if (subChoice == 5) {    }
+                else if (subChoice == 6) {    }
+                else if (subChoice == 7) {    }
+                else if (subChoice == 8) {    }
             }
         
             else if (mainChoice == 2) {
                String cdName = "";
-               while ((cdName.equals("") || cdName == null)) {
+               while ((cdName.equals("") || cdName == null) && !cdName.equals("exit")) {
                    System.out.println("Please enter the name of the CD you'd like to access (exit to cancel): ");
                    cdName = stdIn.readLine(); 
-                   if (cdName.equals("exit"))
-                       break;
-                   if (subChoice ==1) {
-                       int found = Collections.binarySearch(cds, new CD (cdName, 0), new compareCD());
-                       if (found < 0) {
-                           System.out.println("That file was not found, was there a typo?");
-                           cdName = "";
-                       }
-                       else {
-                           cds.get(found).listSongs();   
-                           break;
-                       }
+               }
+               if (subChoice ==1) {
+                   int found = Collections.binarySearch(cds, new CD (cdName, 0), new compareCD());
+                   if (found < 0 && !cdName.equals("exit")) {
+                       System.out.println("That file was not found, was there a typo?");
+                       cdName = "";
+                   }
+                   else if (!cdName.equals("exit")) {
+                       cds.get(found).listSongs();   
                    }
                }
-            }          
+               else if (subChoice == 2) {    }
+               else if (subChoice == 3) {    }
+               else if (subChoice == 4) {    }
+               else if (subChoice == 5) {    }
+               else if (subChoice == 6) {    }            
+            }
+                      
             while (!contin.equals("y") && !contin.equals("yes") && !contin.equals("n") && !contin.equals("no")) {
                 System.out.println ("Would you like to continue? (y/n)");
                 contin = stdIn.readLine().toLowerCase();
             }
+            
         } while (contin.equals("y") || contin.equals("yes"));
         stdIn.close();
         System.out.println("Thank you and have a terrrible day");
@@ -86,12 +95,13 @@ public class Driver {
 	    else if (menuNum == 1) {    
 	        System.out.println ("\n---------  SUB-MENU #1  ----------");
 	        System.out.println ("1) Display all of your CDs"); // Just the CD titles, numbered in order
-	        System.out.println ("2) Add a CD"); // Adds a CD by reading from input file
-    	    System.out.println ("3) Remove a CD");
-    	    System.out.println ("4) Copy a CD");
-    	    System.out.println ("5) Create a sub-CD");
-    	    System.out.println ("6) List songs in common between two CDs");
-    	    System.out.println ("7) Return back to main menu.");
+            System.out.println ("2) Display information on a particular CD"); // Just the CD titles, numbered in order
+	        System.out.println ("3) Add a CD"); // Adds a CD by reading from input file
+    	    System.out.println ("4) Remove a CD");
+    	    System.out.println ("5) Copy a CD");
+    	    System.out.println ("6) Create a sub-CD");
+    	    System.out.println ("7) List songs in common between two CDs");
+    	    System.out.println ("8) Return back to main menu.");
     	    System.out.println ("----------------------------------");
     	}
     	else {
@@ -110,9 +120,9 @@ public class Driver {
             int choice = Integer.parseInt (stdIn.readLine ());
             if (menuNum == 0 && choice>3)
                 throw new NumberFormatException ();
-            else if (menuNum ==1 && choice > 7)
+            else if (menuNum ==1 && choice > 8)
                 throw new NumberFormatException ();
-            else if (choice >6)
+            else if (choice >6 && menuNum!=1)
                 throw new NumberFormatException ();
             return choice;
         }
