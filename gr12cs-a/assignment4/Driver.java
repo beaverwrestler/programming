@@ -34,30 +34,34 @@ public class Driver {
                 }
                 if (subChoice == 2) {
                     System.out.println("Please enter the name of the file/CD you'd like to load into memory: ");
-                    String name = stdIn.readLine();
+                    String name = stdIn.readLine().toLowerCase();
                     importCDs(name);
                 }
             }
         
             else if (mainChoice == 2) {
-                System.out.println("Please enter the name of the CD you'd like to access: ");
-                String cdName = stdIn.readLine(); 
-                if (subChoice ==1) {
-                    int found = Collections.binarySearch(cds, new CD (cdName, 0), new compareCD());
-                    if (found < 0)
-                        System.out.println("not found");
-                    else 
-                        cds.get(found).listSongs();   
-                }
+               
             }          
             while (!contin.equals("y") && !contin.equals("yes") && !contin.equals("n") && !contin.equals("no")) {
                 System.out.println ("Would you like to continue? (y/n)");
-                contin = stdIn.readLine();
+                contin = stdIn.readLine().toLowerCase();
             }
         } while (contin.equals("y") || contin.equals("yes"));
         
         stdIn.close();
         System.out.println("Thank you and have a terrrible day");
+    }
+    
+    public static void twoOne () {
+        System.out.println("Please enter the name of the CD you'd like to access: ");
+        String cdName = stdIn.readLine().toLowerCase(); 
+        if (subChoice ==1) {
+            int found = Collections.binarySearch(cds, new CD (cdName, 0), new compareCD());
+            if (found < 0)
+                System.out.println("That file was not found, was there a typo?");
+            else 
+                cds.get(found).listSongs();   
+            }
     }
     
     public static int displayMenu (int menuNum, BufferedReader stdIn) throws IOException {
