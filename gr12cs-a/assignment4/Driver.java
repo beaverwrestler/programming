@@ -8,11 +8,14 @@ import java.util.*;
 
 public class Driver {
     private static ArrayList <CD> cds = new ArrayList();
+    private static boolean fileFound = true;
 
     public static void main (String[] args) throws IOException {
     	BufferedReader stdIn = new BufferedReader (new InputStreamReader (System.in));
         importCDs("Millenium.txt");
+        fileFound = false;
         String contin = "";
+        boolean cont = false;
         
         do {        
         	int mainChoice, subChoice;
@@ -33,14 +36,36 @@ public class Driver {
                     System.out.println();
                 }
                 if (subChoice == 2) {
-                    System.out.println("Please enter the name of the file/CD you'd like to load into memory: ");
-                    String name = stdIn.readLine().toLowerCase();
-                    importCDs(name);
+                    while (fileFound == false) {
+                        System.out.println("Please enter the name of the file/CD you'd like to load into memory: ");
+                        String name = stdIn.readLine().toLowerCase();
+                        if (name.equals("exit"))
+                            break;
+                        fileFound = importCDs(name);    
+                    }   
                 }
             }
         
             else if (mainChoice == 2) {
-               
+               String cdName = "";
+               while ((cdName.equals("") || cdName == null)) {
+                   System.out.println("Please enter the name of the CD you'd like to access (exit to cancel): ");
+                   cdName = stdIn.readLine().toLowerCase(); 
+                   if (cdName.equals("exit")){
+                       break;
+                   }
+                   if (subChoice ==1) {
+                       int found = Collections.binarySearch(cds, new CD (cdName, 0), new compareCD());
+                       if (found < 0) {
+                           System.out.println("That file was not found, was there a typo?");
+                           cdName = "";
+                       }
+                       else {
+                           cds.get(found).listSongs();   
+                            break;
+                       }
+                   }
+               }
             }          
             while (!contin.equals("y") && !contin.equals("yes") && !contin.equals("n") && !contin.equals("no")) {
                 System.out.println ("Would you like to continue? (y/n)");
@@ -50,18 +75,6 @@ public class Driver {
         
         stdIn.close();
         System.out.println("Thank you and have a terrrible day");
-    }
-    
-    public static void twoOne () {
-        System.out.println("Please enter the name of the CD you'd like to access: ");
-        String cdName = stdIn.readLine().toLowerCase(); 
-        if (subChoice ==1) {
-            int found = Collections.binarySearch(cds, new CD (cdName, 0), new compareCD());
-            if (found < 0)
-                System.out.println("That file was not found, was there a typo?");
-            else 
-                cds.get(found).listSongs();   
-            }
     }
     
     public static int displayMenu (int menuNum, BufferedReader stdIn) throws IOException {
@@ -115,7 +128,7 @@ public class Driver {
         }
     }
     
-    public static void importCDs (String fileName) {
+    public static boolean importCDs (String fileName) {
         try {
             BufferedReader inp = new BufferedReader (new FileReader (fileName));
             String cdName = inp.readLine();
@@ -133,6 +146,7 @@ public class Driver {
             }
             
             Collections.sort(cds, new compareCD());
+            return true;
         }
         catch (FileNotFoundException e) {
             System.out.println("That file was not found, was there a typo?");
@@ -140,5 +154,6 @@ public class Driver {
         catch (Exception e) {
             System.out.println("Something bad went wrong, weally bad...");
         }
+        return false;
     }
 }
