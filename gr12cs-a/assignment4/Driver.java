@@ -1,4 +1,4 @@
-/* Name: Artin Sarkezians   
+/* Name: Artin S.   
  * Due Date: Today
  * Assignment: the one with the cd's
 */ 
@@ -40,7 +40,7 @@ public class Driver {
                 }
                 else if (subChoice == 2) { 
                     cdName =  findCD(stdIn);
-                    //put code to print info on CD here
+                    //System.out.println()
                     cdName = "";
                 }
                 else if (subChoice == 3) {        //this is fine

@@ -12,7 +12,7 @@ public class CD {
     
     public void addSong (String title, String name, String genre, int rating, String length) {
         Time duration = new Time (length);
-        songs.add(new Song(title, name, genre, rating, duration));
+        songs.add(new Song(title, name, genre, rating, length));
     }
     
     public int cdLength () {    
@@ -21,12 +21,14 @@ public class CD {
     
     public void commonSongs () {    }
     
-    public void listSongs () {
+    public void listSongs () {        //this is done
         for (int i = 0; i < songs.size(); i ++) 
             System.out.println(songs.get(i));
     }
     
-    public void removeSong (String title, int num) {    }
+    public void removeSong (String title, int num) {
+    
+    }
     
     public String toString () {
         return title;
@@ -34,6 +36,18 @@ public class CD {
     
     public String getTitle () {
         return title;
+    }
+    
+    public int getNumSongs () {
+        return numSongs;
+    }
+    
+    public int calcTime () {
+        int tot = 0;
+        String time = ""
+        for (int i = 0; i <songs.size(); i++) {
+            
+        }
     }
 }
 

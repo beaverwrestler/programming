@@ -14,4 +14,8 @@ public class Song {
     public String toString () {
         return title;
     }
+    
+    public String getDurationCOlon () {
+        return duration.getTimeColon();
+    }
 }
