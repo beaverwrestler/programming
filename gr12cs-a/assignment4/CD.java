@@ -12,7 +12,7 @@ public class CD {
     
     public void addSong (String title, String name, String genre, int rating, String length) {
         Time duration = new Time (length);
-        songs.add(new Song(title, name, genre, rating, length));
+        songs.add(new Song(title, name, genre, rating, duration));
     }
     
     public int cdLength () {    
@@ -44,10 +44,11 @@ public class CD {
     
     public int calcTime () {
         int tot = 0;
-        String time = ""
+        String time = "";
         for (int i = 0; i <songs.size(); i++) {
             
         }
+        return -1;
     }
 }
 

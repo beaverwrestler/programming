@@ -12,9 +12,9 @@ public class Driver {
     
     public static void main (String[] args) throws IOException {
     	BufferedReader stdIn = new BufferedReader (new InputStreamReader (System.in));
-        //importCDs("Millenium.txt");
-        String contin = "";
-        String cdName = "";
+        importCDs("Millenium");
+        String contin;
+        String cdName;
         
         do {        
         	int mainChoice, subChoice;
@@ -85,7 +85,7 @@ public class Driver {
             
         } while (contin.equals("y") || contin.equals("yes"));
         stdIn.close();
-        System.out.println("Thank you and have a terrrible day");
+        System.out.println("Bye!");
     }
     
     public static int displayMenu (int menuNum, BufferedReader stdIn) throws IOException {
@@ -128,6 +128,8 @@ public class Driver {
                 throw new NumberFormatException ();
             else if (choice >6 && menuNum!=1)
                 throw new NumberFormatException ();
+            else if (choice<1)
+                throw new NumberFormatException();
             return choice;
         }
         catch (NumberFormatException e) {
@@ -140,8 +142,8 @@ public class Driver {
         }
     }
     
-    public static void importCDs (String fileName) {
-        if (fileName.indexOf (".txt") < 0)
+    private static void importCDs (String fileName) {
+        if (!fileName.contains (".txt"))
             fileName += ".txt";
         try {
             BufferedReader inp = new BufferedReader (new FileReader (fileName));
@@ -171,7 +173,7 @@ public class Driver {
     
     public static String findCD (BufferedReader stdIn) throws IOException {
         String cdName = "";
-        while ((cdName.equals("") || cdName == null) && !cdName.equals("exit")) {
+        while (cdName.equals("") && !cdName.equals("exit")) {
             System.out.println("Please enter the name of the CD you'd like to access (exit to cancel): ");
             cdName = stdIn.readLine(); 
         }
