@@ -1,4 +1,4 @@
-//by Artin Sarkezians
+//by Artin S.
 import java.util.*;
 public class PartB_2 {
     public static void main (String Args[]) {        

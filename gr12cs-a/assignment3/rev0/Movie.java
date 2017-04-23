@@ -1,7 +1,7 @@
 import java.util.Comparator;
 
 /*
-Name: Artin Sarkezians
+Name: Artin S.
 Submission: Assignment #3 (April 7-ish, 2017)
 Description: Objects are made from this and data is stored in instances of this class, implements comparator
  */

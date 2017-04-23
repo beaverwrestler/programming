@@ -1,5 +1,5 @@
 //Assignment #2
-//Name: Artin Sarkezians
+//Name: Artin S.
 //This programs takes in an input file with one or more grids and finds the cheapest route from the start to end coordinates, where each 
 //position has a "cost"
 

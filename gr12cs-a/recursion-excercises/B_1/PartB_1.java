@@ -1,4 +1,4 @@
-//by Artin Sarkezians
+//by Artin S
 import java.util.Scanner;
 public class PartB_1 {
     public static void main (String args[]) {

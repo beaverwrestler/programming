@@ -1,4 +1,4 @@
-//Name: Artin Sarkezians
+//Name: Artin S.
 //Question C
 //Due Date: Thursday, Feb 23, 2017
 //Bonus: can search up to 100k chars in under 35ms (on my computer

@@ -1,5 +1,5 @@
 /*
-Name: Artin Sarkezians
+Name: Artin S.
 Submission: Assignment #3 (April 7-ish, 2017)
 Description: Takes input of movies and their rankings from a text file and organises them into a database, creates interface for user to search and observe data
 Bonus: Not much, it gets rid of additional spaces between the titles if that counts
