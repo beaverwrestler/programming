@@ -22,8 +22,9 @@ public class CD {
     public void commonSongs () {    }
     
     public void listSongs () {        //this is done
+        System.out.println("\nSongs:");
         for (int i = 0; i < songs.size(); i ++) 
-            System.out.println(songs.get(i));
+            System.out.println((i+1) + ") " + songs.get(i));
     }
     
     public void removeSong (String title, int num) {
