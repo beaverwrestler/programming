@@ -4,6 +4,8 @@ public class CD {
     private ArrayList <Song> songs = new ArrayList();
     private String title;
     private int numSongs;
+    Time duration;
+
 
     public CD (String title, int numSongs) {    //cosntructor
         this.title = title;
@@ -11,12 +13,9 @@ public class CD {
     }
     
     public void addSong (String title, String name, String genre, int rating, String length) {
-        Time duration = new Time (length);
+        duration = new Time (length);
         songs.add(new Song(title, name, genre, rating, duration));
-    }
-    
-    public int cdLength () {    
-        return -1;
+        calcTime();
     }
     
     public void commonSongs () {    }
@@ -24,32 +23,31 @@ public class CD {
     public void listSongs () {        //this is done
         System.out.println("\nSongs:");
         for (int i = 0; i < songs.size(); i ++) 
-            System.out.println((i+1) + ") " + songs.get(i));
+            System.out.println((i+1) + ") " + songs.get(i).getSongTitle());
     }
     
     public void removeSong (String title, int num) {
-    
+        calcTime();
     }
-    
-    public String toString () {
-        return title;
-    }
-    
-    public String getTitle () {
-        return title;
-    }
-    
-    public int getNumSongs () {
-        return numSongs;
-    }
-    
-    public int calcTime () {
+
+    private int calcTime () {
         int tot = 0;
         String time = "";
         for (int i = 0; i <songs.size(); i++) {
-            
+
         }
         return -1;
+    }
+
+    //gettter
+    public String getTitle () {
+        return title;
+    }
+    public String getTime () {
+        return "blah";
+    }
+    public int getNumSongs () {
+        return numSongs;
     }
 }
 
