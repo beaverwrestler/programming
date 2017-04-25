@@ -14,8 +14,9 @@ public class Driver {
     	BufferedReader stdIn = new BufferedReader (new InputStreamReader (System.in));
         importCDs("Millenium");
         importCDs("Wannabe");
-        String contin;
+        String contin = "y";
         int cdNum = -1;
+        boolean show = false;
         
         do {        
         	int mainChoice, subChoice;
@@ -72,6 +73,9 @@ public class Driver {
                 else if (subChoice == 6) {    }
                 else if (subChoice == 7) {    }
                 else if (subChoice == 8) { 
+                    mainChoice = 0;
+                    subChoice = 0;
+                    show = true;
                     displayMenu(0, stdIn);        //this is broken af
                 }
             }
@@ -94,7 +98,7 @@ public class Driver {
                }
             }
                       
-            while (!contin.equals("y") && !contin.equals("yes") && !contin.equals("n") && !contin.equals("no")) {
+            while (!contin.equals("y") && !contin.equals("yes") && !contin.equals("n") && !contin.equals("no") && !show) {
                 System.out.print ("\nWould you like to continue? (y/n): ");
                 contin = stdIn.readLine().toLowerCase();
             }
