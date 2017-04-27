@@ -1,6 +1,6 @@
 public class Time {
-    private int mins;
-    private int secs;
+    private int mins = 0;
+    private int secs = 0;
     private String colonFormat;
     
     public Time (String colonFormat) {    //construtor 1
@@ -23,5 +23,12 @@ public class Time {
     }
     public String getTimeColon () {
         return colonFormat;
+    }
+
+    //setter
+    public void updateTime (int secs) {
+        this.secs = (secs%60);
+        mins = (int) secs/60;
+        colonFormat = mins + ":" + secs;
     }
 }

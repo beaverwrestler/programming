@@ -3,6 +3,8 @@
  * Assignment: the one with the cd's
 */ 
 
+//YOU WERE WORKING ON MENU 1 SUB 2 TRYING TO GET THE TIMES RIGHT, AS OF NOW, I DON'T THINK MOD WORKS
+
 import java.io.*;
 import java.util.*;
 
@@ -32,13 +34,13 @@ public class Driver {
             
             //sub menu 1
             if (mainChoice == 1) {
-                if (subChoice == 1)        //working
+                if (subChoice == 1)        //working, done
                     listCDs();
-                else if (subChoice == 2) {    //working
+                else if (subChoice == 2) {    //working, not done
                     int temp = findCD(stdIn, true);
                     while (temp!=-1) {
                         System.out.println("\nCD Name: " +cds.get(temp).getTitle() + "\nNumber of Songs: " +
-                                cds.get(temp).getNumSongs() + "\nTotal Duration: " + cds.get(temp).getTime());
+                                cds.get(temp).getNumSongs() + "\nTotal Duration: " + cds.get(temp).getTime(temp));
                         temp = findCD(stdIn, false);
                     }
                 }
@@ -60,16 +62,16 @@ public class Driver {
                             cds.remove(temp);
                     }
                 }
-                /*else if (subChoice == 5) {
+                else if (subChoice == 5) {
                     while (true) {
                         int temp = findCD(stdIn, true);
                         if (temp==-1)
                             break;
                         else {
-                            cds.add(copyCD(temp));
+                            //cds.add(copyCD(temp));
                         }
                     }
-                }*/
+                }
                 else if (subChoice == 6) {    }
                 else if (subChoice == 7) {    }
                 else if (subChoice == 8) { 
@@ -191,9 +193,16 @@ public class Driver {
     }
 
     private static void copyCD (int num) {
+        String tempTitle = cds.get(num).getTitle() + " - Copy";
+        int tempNumSongs = cds.get(num).getNumSongs();
+        CD temp = new CD (tempTitle, tempNumSongs);
+        //Song tempSong = new Song(cds.get(num).getTitle());
+
+        for (int i = 0; i < tempNumSongs; i++) {
+            //blah
+        }
 
         //make return type CD and add code to copy songs and title and shit
-        return;
     }
     
     private static int findCD (BufferedReader stdIn, boolean a) throws IOException {

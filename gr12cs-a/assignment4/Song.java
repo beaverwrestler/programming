@@ -27,4 +27,11 @@ public class Song {
     public String getDurationColon () {
         return duration.getTimeColon();
     }
+    public int getDurationSeconds () {
+        String colonFormat = duration.getTimeColon();
+        int colon = colonFormat.indexOf(":");
+        int mins = Integer.parseInt(colonFormat.substring(0, colon));
+        int secs = Integer.parseInt(colonFormat.substring(colon+1));
+        return secs + (mins*60);
+    }
 }
