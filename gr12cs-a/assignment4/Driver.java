@@ -4,6 +4,7 @@
 */ 
 
 //YOU WERE WORKING ON MENU 1 SUB 2 TRYING TO GET THE TIMES RIGHT, AS OF NOW, I DON'T THINK MOD WORKS
+//millenium cd was 54:48
 
 import java.io.*;
 import java.util.*;

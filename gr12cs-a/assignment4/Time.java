@@ -11,7 +11,7 @@ public class Time {
     }
     public Time (int sec) {    //constructor #2
         mins = (int) sec/60;
-        secs = sec%60;
+        secs = (sec%60);
     } 
     
     //getters
@@ -26,9 +26,9 @@ public class Time {
     }
 
     //setter
-    public void updateTime (int secs) {
-        this.secs = (secs%60);
-        mins = (int) secs/60;
-        colonFormat = mins + ":" + secs;
+    public void updateTime (int counter) {
+        this.counter = (counter%60);
+        mins = (int) counter/60;
+        colonFormat = mins + ":" + this.counter;
     }
 }
