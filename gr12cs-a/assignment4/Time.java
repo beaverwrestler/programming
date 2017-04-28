@@ -27,8 +27,8 @@ public class Time {
 
     //setter
     public void updateTime (int counter) {
-        this.counter = (counter%60);
+        secs = (counter%60);
         mins = (int) counter/60;
-        colonFormat = mins + ":" + this.counter;
+        colonFormat = mins + ":" + secs;
     }
 }

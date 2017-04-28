@@ -41,7 +41,7 @@ public class CD {
     public String getTitle () {
         return title;
     }
-    public String getTime (int num) {
+    public String getTime (int num) {        //here
         return duration.getTimeColon();
     }
     public int getNumSongs () {
