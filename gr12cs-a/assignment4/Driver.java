@@ -29,17 +29,17 @@ public class Driver {
 
                 //sub menu 1
                 if (mainChoice == 1) {
-                    if (subChoice == 1)        //working, done
-                        listCDs();
-                    else if (subChoice == 2) {    //working, done
-                        int temp = findCD(stdIn, true, "access");
+                    if (subChoice == 1)        //working, tested
+                        listCDs(true);
+                    else if (subChoice == 2) {    //working, tested
+                        int temp = findCD(stdIn, true, "access", true);
                         while (temp!=-1) {
-                            System.out.println("\nCD Name: " +cds.get(temp).getTitle() + "\nNumber of Songs: " +
+                            System.out.print("\nCD Name: " +cds.get(temp).getTitle() + "\nNumber of Songs: " +
                                     cds.get(temp).getNumSongs() + "\nTotal Duration: " + cds.get(temp).getTime(temp) + "\n");
-                            temp = findCD(stdIn, false, "access");
+                            temp = findCD(stdIn, false, "access", true);
                         }
                     }
-                    else if (subChoice == 3) {        //working, done
+                    else if (subChoice == 3) {        //working, tested
                         while (true) {
                             System.out.print("\nPlease enter the name of the CD you'd like to load into memory ('exit' to cancel): ");
                             String name = stdIn.readLine();
@@ -48,18 +48,19 @@ public class Driver {
                             importCDs(name);
                         }
                     }
-                    else if (subChoice == 4) {      //working, done
+                    else if (subChoice == 4) {      //working, tested
+                        int temp = findCD(stdIn, true, "remove", true);
                         while (true) {
-                            int temp = findCD(stdIn, true, "remove");
-                            if (temp==-1)
+                            if (temp==-1 )
                                 break;
                             else
                                 cds.remove(temp);
+                            temp = findCD(stdIn, true, "remove", true);
                         }
                     }
-                    else if (subChoice == 5) {      //working, done
+                    else if (subChoice == 5) {      //working, tested
                         while (true) {
-                            int temp = findCD(stdIn, true, "copy");
+                            int temp = findCD(stdIn, true, "copy", true);
                             if (temp==-1)
                                 break;
                             else {
@@ -73,19 +74,23 @@ public class Driver {
                             }
                         }
                     }
-                    else if (subChoice == 6) {      //very likely working, done
+                    else if (subChoice == 6) {      //working, tested
                         while (true) {
-                            int temp = findCD(stdIn, true, "access");
+                            int temp = findCD(stdIn, true, "create a sub of", true);
                             if (temp==-1)
                                 break;
                             else {
                                 cds.get(temp).listSongs();
-                                int one = getValidNumber(stdIn, "Start?: ", 1, cds.get(temp).getNumSongs())-1;
-                                int two = getValidNumber(stdIn, "End?: ", 1, cds.get(temp).getNumSongs())-1;
+                                int one = getValidNumber(stdIn, "Starting song?: ", 1, cds.get(temp).getNumSongs())-1;
+                                int two = 0;
+                                while (two < one) {
+                                    two = getValidNumber(stdIn, "Ending song?: ", 1, cds.get(temp).getNumSongs())-1;
+                                    if (two< one)
+                                        System.out.println("The ending CD must have a higher/equal number...");
+                                }
 
                                 String tempTitle = cds.get(temp).getTitle() + " - Sub CD";
-                                int tempNumSongs = cds.get(temp).getNumSongs();
-                                CD tempCD = new CD (tempTitle, tempNumSongs);
+                                CD tempCD = new CD (tempTitle, (two-one+1));
                                 ArrayList <Song> tempSongs = new ArrayList<>(cds.get(temp).getSubArray(one, two));
                                 tempCD.setArray(tempSongs);
                                 tempCD.calcTime();
@@ -93,23 +98,40 @@ public class Driver {
                             }
                         }
                     }
-                    else if (subChoice == 7) {      //holy crap, this might actually work
-                        int cdOne = findCD(stdIn, true, "compare"), cdTwo;
-                        if (cdOne != -1) {
-                            cdTwo = findCD(stdIn, false, "compare");
+                    /*LOOK-E HERE!!!
+
+                    ARE CDs COMSIDERED TO BE THE SAME IF THEY HAVE ONLY THE SAME NAME OF DOES EVERYTHING HAVE TO BE THE SAME?
+
+                     */
+                    else if (subChoice == 7) {      //working, tested
+                        int cdOne = -1, cdTwo = -1;
+                        if (cds.size() == 1)
+                            System.out.println("\nNot enough CDs to comapre, exiting...");
+                        else if (cds.size() == 2) {
+                            System.out.println("\nThere are only 2 CDs loaded, auto-comparing...");
+                            cdOne = 0;
+                            cdTwo = 1;
+                        }
+                        else {
+                            cdOne = findCD(stdIn, true, "compare", true);
+                            if (cdOne >-1)
+                                cdTwo = findCD(stdIn, false, "compare", false);
+                        }
+                        if (cds.size() > 1 && (cdOne != -1 && cdTwo != -1)) {
                             ArrayList <Song> cdOneTempSongs = new ArrayList<>(cds.get(cdOne).getArray());
                             ArrayList <Song> cdTwoTempSongs = new ArrayList<>(cds.get(cdTwo).getArray());
 
                             Collections.sort (cdOneTempSongs, new compareSongTitle());
                             Collections.sort (cdTwoTempSongs, new compareSongTitle());
                             int counter = 1;
-                            System.out.println("\nSongs in common: ");
+                            System.out.println("\nSong(s) in common: ");
 
                             for (int i = 0; i < cdOneTempSongs.size(); i ++) {
                                 int temp = Collections.binarySearch(cdTwoTempSongs, new Song (cdOneTempSongs.get(i).getSongTitle(),
                                         "", "", 0.0, new Time (0)), new compareSongTitle());
                                 if (temp > -1) {
                                     System.out.println(counter + ") " + cdOneTempSongs.get(i).getSongTitle());
+                                    cdOneTempSongs.remove(i);
                                     counter++;
                                 }
                             }
@@ -119,20 +141,28 @@ public class Driver {
                         mainChoice = 0;
                         break;
                     }
+                    else if (subChoice == 9) {
+                        mainChoice = 3;
+                        break;
+                    }
                 }
 
                 //sub menu 2
                 else{
-                    if (subChoice == 6) {
+                    if (subChoice == 6) {       //working, tested
                         mainChoice = 0;
                         break;
                     }
-                    cdNum = findCD(stdIn, true, "access");
+                    else if (subChoice == 7) {
+                        mainChoice = 3;
+                        break;
+                    }
+                    cdNum = findCD(stdIn, true, "access", true);
                     if (cdNum != -1) {
-                        if (subChoice == 1)         //working, MAKE THIS LOOP LIKE SOME OF ITS BROTHER
+                        if (subChoice == 1)         //working, tested
                             while (cdNum != -1) {
                                 cds.get(cdNum).listSongs();
-                                cdNum = findCD(stdIn, false, "access");
+                                cdNum = findCD(stdIn, false, "access", false);
                             }
                         else if (subChoice == 2) {   //working, done
                             int temp1 = findSong(stdIn, true, cdNum);
@@ -190,30 +220,38 @@ public class Driver {
                                 }
                             }
                             cds.get(cdNum).addSong(tempName, tempArtist, tempGenre, rating, time, true);
-                            System.out.println();
                         }
                         else if (subChoice == 4) {
                             int choice = getValidNumber(stdIn, "\nHow would you like to remove the " +
                                     "song by? 1) Number 2) Title 3) First Song 4) Last Song : ", 1, 4);
                             if (choice == 1) {
-                                cds.get(cdNum).listSongs();
-                                int choiceSong = getValidNumber(stdIn, "Pick the song you'd like to remove: "
-                                        , 1, cds.get(cdNum).getNumSongs())-1;
-                                cds.get(cdNum).removeSong(choiceSong);
+                                while (true) {
+                                    cds.get(cdNum).listSongs();
+                                    int choiceSong = getValidNumber(stdIn, "Pick the song you'd like to remove (0 to exit): "
+                                            , 0, cds.get(cdNum).getNumSongs())-1;
+                                    if (choiceSong == -1)
+                                        break;
+                                    cds.get(cdNum).removeSong(choiceSong);
+                                }
+
                             }
                             else if (choice == 2) {
-                                cds.get(cdNum).listSongs();
+                                Collections.sort (cds.get(cdNum).getArray(), new compareSongTitle());
                                 while (true) {
-                                    System.out.print("\nEnter the name of the song you'd like to remove ('exit' to cancel): ");
+                                    cds.get(cdNum).listSongs();
+                                    System.out.print("Enter the name of the song you'd like to remove ('exit' to cancel): ");
                                     String name = stdIn.readLine();
                                     if (name.equalsIgnoreCase("exit"))
                                         break;
-                                    int numSong = Collections.binarySearch(cds.get(cdNum).getArray(), new
-                                            Song(name, "", "", 0.0, new Time (0)), new compareSongTitle());
-                                    if (numSong<0)
-                                        System.out.println("Song not found...");
-                                    else
-                                        cds.get(cdNum).removeSong(numSong);
+                                    int numSong = 0;
+                                    while (numSong != -1) {
+                                        numSong = Collections.binarySearch(cds.get(cdNum).getArray(), new
+                                                Song(name, "", "", 0.0, new Time(0)), new compareSongTitle());
+                                        if (numSong < 0)
+                                            break;
+                                        else
+                                            cds.get(cdNum).removeSong(numSong);
+                                    }
                                 }
                             }
                             else if (choice == 3)
@@ -241,7 +279,7 @@ public class Driver {
                 break;
         }
         stdIn.close();
-        System.out.println("Bye!");
+        System.out.println("\nBye!");
     }
     
     private static int displayMenu (int menuNum, BufferedReader stdIn, boolean showMenu) throws IOException {
@@ -250,7 +288,7 @@ public class Driver {
                 System.out.println("\n----------  MAIN MENU  -----------");
                 System.out.println("1) Accessing your list of CDs");
                 System.out.println("2) Accessing within a particular CD");
-                System.out.println("3) Exit");
+                System.out.println("3) Exit program");
                 System.out.println("----------------------------------");
             } else if (menuNum == 1) {
                 System.out.println("\n---------  SUB-MENU #1  ----------");
@@ -259,31 +297,34 @@ public class Driver {
                 System.out.println("3) Add a CD"); // Adds a CD by reading from input file
                 System.out.println("4) Remove a CD");
                 System.out.println("5) Copy a CD");
-                System.out.println("6) Create a sub-CD");
+                System.out.println("6) Create a Sub-CD");
                 System.out.println("7) List songs in common between two CDs");
-                System.out.println("8) Return back to main menu.");
+                System.out.println("8) Return back to main menu");
+                System.out.println("9) Exit program");
                 System.out.println("----------------------------------");
             } else {
                 System.out.println("\n---------  SUB-MENU #2  ----------");
                 System.out.println("1) Display all songs (in the last sorted order) ");
                 System.out.println("2) Display info on a particular song ");
                 System.out.println("3) Add song");
-                System.out.println("4) Remove Song (4 options)");
-                System.out.println("5) Sort songs (3 options)");
+                System.out.println("4) Remove song (4 options)");
+                System.out.println("5) Sort songs (4 options)");
                 System.out.println("6) Return back to main menu");
+                System.out.println("7) Exit program");
                 System.out.println("----------------------------------");
             }
+            System.out.println();
         }
 
-        System.out.print("\nPlease enter your choice:  ");
+        System.out.print("Please enter your choice:  ");
 
 	    try {
             int choice = Integer.parseInt (stdIn.readLine ());
             if (menuNum == 0 && choice>3)
                 throw new NumberFormatException ();
-            else if (menuNum ==1 && choice > 8)
+            else if (menuNum ==1 && choice > 9)
                 throw new NumberFormatException ();
-            else if (choice >6 && menuNum!=1)
+            else if (choice >7 && menuNum!=1)
                 throw new NumberFormatException ();
             else if (choice<1)
                 throw new NumberFormatException();
@@ -291,10 +332,6 @@ public class Driver {
         }
         catch (NumberFormatException e) {
             return displayMenu (menuNum, stdIn, false);
-        }
-        catch (Exception e) {
-            System.out.println("Something went bad, weally bad...");
-            return -1;
         }
     }
     
@@ -316,12 +353,11 @@ public class Driver {
                 String length = inp.readLine();
                 cd.addSong(title, name, genre, rating, length, false);
             }
-            Collections.sort(cds, new compareCDTitle());
             inp.close();
-            System.out.println("File '" + fileName +"' successfully imported");
+            System.out.print("\tFile '" + fileName +"' successfully imported");
         }
         catch (FileNotFoundException e) {
-            System.out.println("File not found, was there a typo?");
+            System.out.print("\tFile not found, was there a typo?");
         }
         catch (Exception e) {
             System.out.println("Something went bad, weally bad...");
@@ -362,10 +398,8 @@ public class Driver {
                 songName = Integer.parseInt(stdIn.readLine());
                 if (songName > cds.get(cdNum).getNumSongs())
                     throw new IOException ();
-                else if (songName == 0) {
-                    System.out.println();
+                else if (songName == 0)
                     return -1;
-                }
                 songName -= 1;
             }
             catch (Exception e) {
@@ -375,20 +409,20 @@ public class Driver {
         return songName;
     }
 
-    private static int findCD (BufferedReader stdIn, boolean a, String action) throws IOException {
+    private static int findCD (BufferedReader stdIn, boolean a, String action, boolean enter) throws IOException {
         int cdName = -1;
         if (a)
-            listCDs();
-        while (cdName<0) {
+            listCDs(false);
+        if (enter)
+            System.out.println();
+        while (cdName<0 && cds.size() > 0) {
             System.out.print("Please enter the number of the CD you'd like to " + action  + " (0 to exit): ");
             try {
                 cdName = Integer.parseInt(stdIn.readLine());
                 if (cdName > cds.size())
                     throw new IOException ();
-                else if (cdName == 0) {
-                    System.out.println();
+                else if (cdName == 0)
                     return -1;
-                }
                 cdName -= 1;
             }
             catch (Exception e) {
@@ -398,12 +432,15 @@ public class Driver {
         return cdName;
     }
     
-    private static void listCDs () {
+    private static void listCDs (boolean enter) {
         if (cds.size() !=0) {
             System.out.println("\nCDs currently in memory: ");
             for (int i = 0; i < cds.size(); i++)
                 System.out.println((i + 1) + ") " + cds.get(i).getTitle());
         }
-        System.out.println();
+        else
+            System.out.print("\nThere are no CDs left...");
+        if (enter)
+            System.out.println();
     }
 }

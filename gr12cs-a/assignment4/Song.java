@@ -3,7 +3,7 @@ import java.util.Comparator;
 public class Song {
     private String title, artist, genre;    //variables
     private double rating;
-    Time duration;
+    private Time duration;
 
     public Song (String title, String artist, String genre, double rating, Time duration) {        //constructor
         this.title = title;
