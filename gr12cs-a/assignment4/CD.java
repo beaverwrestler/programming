@@ -13,24 +13,27 @@ public class CD {
         duration = new Time (0);
     }
     
-    public void addSong (String title, String name, String genre, int rating, String length) {
+    public void addSong (String title, String name, String genre, double rating, String length, boolean add) {
         songs.add(new Song(title, name, genre, rating, new Time (length)));
+        if (add)
+            numSongs++;
         calcTime();
     }
-    
-    public void commonSongs () {    }
-    
+
     public void listSongs () {        //this is done, working
         System.out.println("\nSongs:");
         for (int i = 0; i < songs.size(); i ++) 
             System.out.println((i+1) + ") " + songs.get(i).getSongTitle());
+        System.out.println();
     }
     
-    public void removeSong (String title, int num) {
+    public void removeSong (int num) {
+        songs.remove(num);
+        numSongs--;
         calcTime();
     }
 
-    private void calcTime () {      //hopefully this works
+    public void calcTime () {      //hopefully this works
         int counter = 0;
         for (int i = 0; i < songs.size(); i ++)
             counter += songs.get(i).getDurationSeconds();
@@ -47,9 +50,31 @@ public class CD {
     public int getNumSongs () {
         return numSongs;
     }
+    public String getSongInfo (int temp) {
+        return "\nSong Title: " + songs.get(temp).getSongTitle() + "\nArtist: " + songs.get(temp).getArtist()
+                + "\nGenre: " + songs.get(temp).getGenre() + "\nRating: " + songs.get(temp).getRating() +
+                "\nDuration: " + songs.get(temp).getDurationColon() + "\n";
+    }
+    public ArrayList <Song> getArray () {
+        return songs;
+    }
+    public ArrayList <Song> getSubArray (int start, int end) {
+        ArrayList <Song> tempSongs = new ArrayList <> (songs); //creates a copy
+
+        for (int i = 0; i < start; i ++)
+            tempSongs.remove(0);
+        for (int i = (end-start+1); i < tempSongs.size();)      //i don't why this works
+            tempSongs.remove((end-start+1));
+        return tempSongs;
+    }
+
+    //setters
+    public void setArray (ArrayList <Song> songs) {
+        this.songs = songs;
+    }
 }
 
-class compareCD implements Comparator<CD> {      //comparator to organise by title
+class compareCDTitle implements Comparator <CD> {      //comparator to organise by title
     public int compare (CD m, CD m1){
         return m.getTitle().compareToIgnoreCase(m1.getTitle());
     }

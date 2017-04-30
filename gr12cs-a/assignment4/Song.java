@@ -1,3 +1,5 @@
+import java.util.Comparator;
+
 public class Song {
     private String title, artist, genre;    //variables
     private double rating;
@@ -33,5 +35,29 @@ public class Song {
         int mins = Integer.parseInt(colonFormat.substring(0, colon));
         int secs = Integer.parseInt(colonFormat.substring(colon+1));
         return secs + (mins*60);
+    }
+}
+
+class compareSongTitle implements Comparator <Song> {      //comparator to organise by title
+    public int compare (Song s, Song s1){
+        return s.getSongTitle().compareToIgnoreCase(s1.getSongTitle());
+    }
+}
+
+class compareSongArtist implements Comparator <Song> {      //comparator to organise by artist
+    public int compare (Song s, Song s1){
+        return s.getArtist().compareToIgnoreCase(s1.getArtist());
+    }
+}
+
+class compareSongTimeLH implements Comparator <Song> {      //comparator to organise by time
+    public int compare (Song s, Song s1){
+        return s.getDurationSeconds() - (s1.getDurationSeconds());
+    }
+}
+
+class compareSongTimeHL implements Comparator <Song> {      //comparator to organise by time
+    public int compare (Song s, Song s1){
+        return s1.getDurationSeconds() - (s.getDurationSeconds());
     }
 }
