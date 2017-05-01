@@ -98,11 +98,6 @@ public class Driver {
                             }
                         }
                     }
-                    /*LOOK-E HERE!!!
-
-                    ARE CDs COMSIDERED TO BE THE SAME IF THEY HAVE ONLY THE SAME NAME OF DOES EVERYTHING HAVE TO BE THE SAME?
-
-                     */
                     else if (subChoice == 7) {      //working, tested
                         int cdOne = -1, cdTwo = -1;
                         if (cds.size() == 1)
