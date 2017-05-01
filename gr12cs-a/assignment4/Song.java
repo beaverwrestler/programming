@@ -1,3 +1,9 @@
+/* Name: Artin S.
+ * Due Date: Monday, May 1, 2017
+ * Description: Instances are made of this class to store info related to each Song, there are multiple getter/setter methods,
+ *              not much functionality beyond that
+*/
+
 import java.util.Comparator;
 
 public class Song {
@@ -32,7 +38,7 @@ public class Song {
     public int getDurationSeconds () {
         String colonFormat = duration.getTimeColon();
         int colon = colonFormat.indexOf(":");
-        int mins = Integer.parseInt(colonFormat.substring(0, colon));
+        int mins = Integer.parseInt(colonFormat.substring(0, colon));   //does the math to get the number of seconds
         int secs = Integer.parseInt(colonFormat.substring(colon+1));
         return secs + (mins*60);
     }
@@ -50,13 +56,13 @@ class compareSongArtist implements Comparator <Song> {      //comparator to orga
     }
 }
 
-class compareSongTimeLH implements Comparator <Song> {      //comparator to organise by time
+class compareSongTimeLH implements Comparator <Song> {      //comparator to organise by time (low to high)
     public int compare (Song s, Song s1){
         return s.getDurationSeconds() - (s1.getDurationSeconds());
     }
 }
 
-class compareSongTimeHL implements Comparator <Song> {      //comparator to organise by time
+class compareSongTimeHL implements Comparator <Song> {      //comparator to organise by time (high to low)
     public int compare (Song s, Song s1){
         return s1.getDurationSeconds() - (s.getDurationSeconds());
     }

@@ -1,3 +1,8 @@
+/* Name: Artin S.
+ * Due Date: Monday, May 1, 2017
+ * Description: Instances are made of this class to store the time of a CD or Song, getters & setters exist, limited functionality beyond this
+*/
+
 public class Time {
     private int mins = 0;
     private int secs = 0;
@@ -10,17 +15,15 @@ public class Time {
         int secs = Integer.parseInt(colonFormat.substring(colon+1));
     }
     public Time (int sec) {    //constructor #2
-        mins = (int) sec/60;
+        mins = sec/60;
         secs = (sec%60);
+        if (secs>10)
+            colonFormat = mins+ ":" + secs;     //adds colon
+        else
+            colonFormat = mins+ ":0" + secs;        //makes sure that the number of seconds doesn't look funny (ie. 56:8)
     } 
     
     //getters
-    public int getMins () {
-        return mins;
-    }
-    public int getSecs () {
-        return secs;
-    }
     public String getTimeColon () {
         return colonFormat;
     }
@@ -29,6 +32,9 @@ public class Time {
     public void updateTime (int counter) {
         secs = (counter%60);
         mins = (int) counter/60;
-        colonFormat = mins + ":" + secs;
+        if (secs>10)
+            colonFormat = mins+ ":" + secs;     //adds colon
+        else
+            colonFormat = mins+ ":0" + secs;        //makes sure that the number of seconds doesn't look funny (ie. 56:8)
     }
 }
