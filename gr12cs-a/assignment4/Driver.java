@@ -85,7 +85,7 @@ public class Driver {
                             else {
                                 cds.get(temp).listSongs();      //lists songs of said Cd
                                 int one = getValidNumber(stdIn, "Starting song?: ", 1, cds.get(temp).getNumSongs())-1;      //gets starting and ending index
-                                int two = 0;
+                                int two = -1;
                                 while (two < one) {
                                     two = getValidNumber(stdIn, "Ending song?: ", 1, cds.get(temp).getNumSongs())-1;
                                     if (two< one)
@@ -129,7 +129,6 @@ public class Driver {
                                         "", "", 0.0, new Time (0)), new compareSongTitle());
                                 if (temp > -1) {
                                     System.out.println(counter + ") " + cdOneTempSongs.get(i).getSongTitle());
-                                    cdOneTempSongs.remove(i);
                                     counter++;
                                 }
                             }
