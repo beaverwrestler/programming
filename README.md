@@ -1,2 +1,2 @@
 # programming
-all my programming work
+all my school-related programming work
