@@ -7,32 +7,20 @@ public class dynamic_data_problem1_rev0 {
         BufferedReader stdIn = new BufferedReader (new InputStreamReader (System.in));
         int num = getValidNumber (stdIn, "Number of Cards: ", -1, -1);
         List <Integer> cards = new ArrayList <Integer> ();
-                List <Integer> new1 = new ArrayList <Integer> ();
-
+        List <Integer> new1 = new ArrayList <Integer> ();
         Iterator it = cards.iterator ();
+        cards.add(num);
         
-        for (int i = 1; i <= num; i++)
-            cards.add(i);
-        
-        while (true) {
-            if (it.hasNext() == false)
-                break;  
-            new1.add(cards.get(0));     
-            cards.remove(0);
-            if (it.hasNext() == false)
-                break;  
-            cards.add(cards.get(0));
-            cards.remove(0);     
+        for (int i = num; i >1; i--) {
+            num--;
+            cards.add(0, cards.get(cards.size()-1));
+            cards.remove(cards.size()-1);
+            cards.add(0, num);
         }
-        
-        print (new1);
-        
-    }
-    
-    public static void print (List <Integer> it) {
-        for (int i = 0; i< it.size(); i++) {
-            System.out.print (it.get (i) + " ");
-        }
+   
+        for (int i = 0; i< cards.size(); i++) {
+            System.out.print (cards.get (i) + " ");
+        }        
     }
     
     private static int getValidNumber (BufferedReader stdIn, String question, int min, int max) throws IOException {
