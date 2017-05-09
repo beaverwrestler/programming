@@ -8,7 +8,6 @@ public class dynamic_data_problem1_rev0 {
         int num = getValidNumber (stdIn, "Number of Cards: ", -1, -1);
         List <Integer> cards = new ArrayList <Integer> ();
         List <Integer> new1 = new ArrayList <Integer> ();
-        Iterator it = cards.iterator ();
         cards.add(num);
         
         for (int i = num; i >1; i--) {
