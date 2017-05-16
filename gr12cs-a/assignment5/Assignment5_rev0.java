@@ -3,20 +3,21 @@ import java.io.*;
 
 //programs assumes numbers are also words, lower case is same as uppercase
 
-public class assignment5_rev0 {
+public class Assignment5_rev0 {
     public static void main (String [] args) throws FileNotFoundException, IOException {
         long startTime = System.currentTimeMillis();
         BufferedReader text = new BufferedReader (new FileReader ("input.txt"));
-        String book = "";
+        StringBuilder book = new StringBuilder ();
         String line = text.readLine();
 
         while (line != null){   //imports the whole goddamn book
-            book += " " + line.toLowerCase().trim();
+            book.append(line + " ");
             line = text.readLine();
         }
 
         text.close();
-        StringTokenizer words = new StringTokenizer (book, "~!@#$%^&*()_+{}|:\"<>?`=[];, ./-\\");
+        String finalStr = book.toString().toLowerCase();
+        StringTokenizer words = new StringTokenizer (finalStr, "~!@#$%^&*()_+{}|:\"<>?`=[];, ./-\\");
         Map <String, Integer> bookMap = new HashMap <> ();
 
         while (words.hasMoreTokens()) {
@@ -25,13 +26,12 @@ public class assignment5_rev0 {
             int num = 1;
             try {
                 num = bookMap.put (temp, 1);
-                if (num >= 1) {
+                if (num >= 1) 
                     bookMap.put(temp, (num+1));
-                }
             }
             catch (NullPointerException e) {}
         }
-
+        
         System.out.println(bookMap);
         System.out.println ("Time: " + (System.currentTimeMillis() - startTime));
     }
