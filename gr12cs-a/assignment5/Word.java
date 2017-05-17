@@ -2,7 +2,7 @@ public class Word {
     private String word = "";
     private int insta = 0;
     
-    public word (String word, int insta) {
+    public Word (String word, int insta) {
         this.word = word;
         this.insta = insta;
     }
@@ -12,6 +12,6 @@ public class Word {
     }
     
     public void setIntsa (int num) {
-        intsa = num;
+        insta = num;
     }
 }
