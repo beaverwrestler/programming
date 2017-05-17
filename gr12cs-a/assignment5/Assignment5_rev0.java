@@ -23,7 +23,7 @@ public class Assignment5_rev0 {
         while (words.hasMoreTokens()) {
             String temp = words.nextToken();
             temp = temp.toLowerCase();
-            int num = 1;
+            int num;
             try {
                 num = bookMap.put (temp, 1);
                 if (num >= 1) 
@@ -32,7 +32,7 @@ public class Assignment5_rev0 {
             catch (NullPointerException e) {}
         }
         
-        System.out.println(bookMap);
+        System.out.println(bookMap.size());
         System.out.println ("Time: " + (System.currentTimeMillis() - startTime));
     }
 }

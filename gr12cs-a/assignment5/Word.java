@@ -1,17 +1,12 @@
 public class Word {
-    private String word = "";
-    private int insta = 0;
-    
-    public Word (String word, int insta) {
-        this.word = word;
-        this.insta = insta;
+    private int instances = 0;
+    public Word (int instances) {
+        this.instances = instances;
     }
-    
     public int getInsta () {
-        return insta;
+        return instances;
     }
-    
     public void setIntsa (int num) {
-        insta = num;
+        instances = num;
     }
 }
