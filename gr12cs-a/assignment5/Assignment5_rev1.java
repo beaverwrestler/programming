@@ -4,7 +4,7 @@ import java.io.*;
 //programs assumes numbers are also words, lower case is same as uppercase
 //fully functional
 
-//BOTH VERSIONS STILL CONSIDER A ' AS A WORD, FIX THIS
+//BOTH VERSIONS STILL CONSIDER A ' AS A WORD, FIX THIS ----> in ALICE 
 
 public class Assignment5_rev1 {
     public static void main (String [] args) throws FileNotFoundException, IOException {
@@ -27,18 +27,21 @@ public class Assignment5_rev1 {
         HashMap <String, Word> bookMap = new HashMap <> ();
 
         while (words.hasMoreTokens()) {
-            Word tempWord;
             String temp = words.nextToken().toLowerCase();
             try {
-                tempWord = (Word) bookMap.put (temp, new Word (1, temp));
-                if (tempWord.getInsta () >= 1)
-                   bookMap.put(temp, new Word( tempWord.getInsta()+1, temp));
+                Word addWord = new Word (1, temp);
+                Word returnWord = (Word) bookMap.put (temp, addWord);
+                if (returnWord.getInsta () >= 1) {
+                   addWord.addBy (returnWord.getInsta());
+                   bookMap.put(temp, addWord);
+                }
             }
             catch (NullPointerException e) {}
             catch (ClassCastException e) {}
         }
+        
         ArrayList <Word> wordArray = new ArrayList <> (bookMap.values());
-        Collections.sort(wordArray, new Comparator<Word>() {    //i vaguely understand what this code is, it was autocompleted in intellij
+        Collections.sort(wordArray, new Comparator<Word>() {    //gotta love autocomplete
             @Override
             public int compare(Word o1, Word o2) {
                 return o2.getInsta() - o1.getInsta();
@@ -49,7 +52,8 @@ public class Assignment5_rev1 {
         System.out.println("20 Most Frequency Words");
 
         for (int i = 1; i <21; i++) {
-            System.out.println(i + ") \"" + wordArray.get(i).getWord() + "\" has " + wordArray.get(i).getInsta() + " instances");
+            System.out.println(i + ") \"" + wordArray.get(i-1).getWord() 
+                               + "\" has " + wordArray.get(i-1).getInsta() + " instances");
         }
 
         System.out.println("Program is Complete");

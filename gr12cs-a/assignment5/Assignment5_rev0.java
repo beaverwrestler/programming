@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 //fully functional
 
 //BOTH VERSIONS STILL CONSIDER A ' AS A WORD, FIX THIS
+//alice in winderland should be ~40ms, moby dick should be ~220ms
 
 public class Assignment5_rev0 {
     public static void main (String [] args) throws FileNotFoundException, IOException {
