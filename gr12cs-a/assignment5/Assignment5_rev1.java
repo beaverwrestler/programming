@@ -29,11 +29,12 @@ public class Assignment5_rev1 {
         while (words.hasMoreTokens()) {
             String temp = words.nextToken().toLowerCase();
             try {
-                Word addWord = new Word (1, temp);
-                Word returnWord = (Word) bookMap.put (temp, addWord);
-                if (returnWord.getInsta () >= 1) {
-                   addWord.addBy (returnWord.getInsta());
-                   bookMap.put(temp, addWord);
+                if (bookMap.containsKey (temp)) {
+                    bookMap.put(temp, bookMap.get(temp).addBy(1));
+                }
+                else {
+                    Word addWord = new Word (1, temp);
+                    bookMap.put(temp, addWord);
                 }
             }
             catch (NullPointerException e) {}
