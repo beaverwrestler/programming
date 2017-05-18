@@ -1,12 +1,14 @@
 public class Word {
     private int instances = 0;
-    public Word (int instances) {
+    private String name = "";
+    public Word (int instances, String name) {
         this.instances = instances;
+        this.name = name;
     }
     public int getInsta () {
         return instances;
     }
-    public void setIntsa (int num) {
-        instances = num;
+    public String getWord () {
+        return name;
     }
 }
