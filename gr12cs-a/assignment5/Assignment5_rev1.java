@@ -19,7 +19,7 @@ public class Assignment5_rev1 {
         }
 
         text.close();
-        String finalStr = book.toString().toLowerCase();
+        String finalStr = book.toString();
         StringTokenizer words = new StringTokenizer (finalStr, "~!@#$%^&*()_+{}|<>:\"?`=[];, ./-\\");
         HashMap <String, Word> bookMap = new HashMap <> ();
 
@@ -28,7 +28,7 @@ public class Assignment5_rev1 {
             try {
                 if (!temp.equals("'")) {
                     if (bookMap.containsKey (temp))
-                        bookMap.put(temp, bookMap.get(temp).increment());
+                        bookMap.put(temp, bookMap.get(temp).addBy(1));
                     else
                         bookMap.put(temp, new Word (1, temp));
                 }

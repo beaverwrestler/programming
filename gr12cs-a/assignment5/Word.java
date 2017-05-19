@@ -11,8 +11,8 @@ public class Word {
     public String getWord () {
         return name;
     }
-    public Word increment () {
-        instances += 1;
+    public Word addBy (int num) {
+        instances += num;
         return this;
     }
 }

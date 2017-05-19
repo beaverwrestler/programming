@@ -2,13 +2,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
-public class Worker extends Thread{
+public class Worker_rev1 extends Thread{
     private String book;
     private int status = 0;
-    private ArrayList<Word> wordArray;
-    private HashMap <String, Word> bookMap = new HashMap <> ();
+    private HashMap <String, Integer> bookMap = new HashMap <> ();
 
-    public Worker (String book) {
+    public Worker_rev1(String book) {
         this.book = book;
     }
 
@@ -20,18 +19,17 @@ public class Worker extends Thread{
             try {
                 if (!temp.equals("'")) {
                     if (bookMap.containsKey (temp))
-                        bookMap.put(temp, bookMap.get(temp).addBy(1));
+                        bookMap.put(temp, bookMap.get(temp)+1);
                     else
-                        bookMap.put(temp, new Word (1, temp));
+                        bookMap.put(temp, 1);
                 }
             }
             catch (NullPointerException e) {}
         }
-        //wordArray = new ArrayList <> (bookMap.values());
         status =1;
     }
 
-    public HashMap <String, Word> getArray () {
+    public HashMap <String, Integer> getArray () {
         return bookMap;
     }
     public int getStatus () {
