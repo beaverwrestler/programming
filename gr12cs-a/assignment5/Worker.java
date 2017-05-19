@@ -27,7 +27,6 @@ public class Worker extends Thread{
             }
             catch (NullPointerException e) {}
         }
-        //wordArray = new ArrayList <> (bookMap.values());
         status =1;
     }
 

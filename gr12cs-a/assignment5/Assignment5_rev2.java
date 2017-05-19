@@ -38,21 +38,14 @@ public class Assignment5_rev2 {
         while (one.getStatus() == 0 || two.getStatus() == 0 || three.getStatus() == 0 || four.getStatus() == 0) {}
         //after computation is done
 
-        System.out.println ("combining: " + (System.currentTimeMillis() - startTime) + "ms\n20 Most Frequent Words\n");
-        //make this faster ^^^^
-
         HashMap <String, Word> bookMapComb = new HashMap <> (one.getArray());
         HashMap <String, Word> bookMapTwo = new HashMap <> (two.getArray());
         HashMap <String, Word> bookMapThree = new HashMap <> (three.getArray());
         HashMap <String, Word> bookMapFour = new HashMap <> (four.getArray());
 
-        Iterator it2 = bookMapTwo.entrySet().iterator();
-        Iterator it3 = bookMapThree.entrySet().iterator();
-        Iterator it4 = bookMapFour.entrySet().iterator();
-
-        bookMapComb = merge(bookMapComb, it2);
-        bookMapComb = merge(bookMapComb, it3);
-        bookMapComb = merge(bookMapComb, it4);
+        bookMapComb = merge(bookMapComb, bookMapTwo.entrySet().iterator());
+        bookMapComb = merge(bookMapComb, bookMapThree.entrySet().iterator());
+        bookMapComb = merge(bookMapComb, bookMapFour.entrySet().iterator());
 
         ArrayList <Word> wordArray = new ArrayList <> (bookMapComb.values());
 
@@ -72,16 +65,17 @@ public class Assignment5_rev2 {
     private static HashMap <String, Word> merge (HashMap <String, Word> main, Iterator it) {
         Word tempW;
         Map.Entry info;
-
         while (it.hasNext()) {
             info = (Map.Entry) it.next();
             tempW = (Word) info.getValue();
             String temp = tempW.getWord();
             int num = tempW.getInsta();
-            if (main.containsKey (temp))
-                main.put(temp, main.get(temp).addBy(num));
-            else
-                main.put(temp, new Word (1, temp));
+            if (!temp.equals("'")) {
+                if (main.containsKey (temp))
+                    main.put(temp, main.get(temp).addBy(num));
+                else
+                    main.put(temp, new Word (1, temp));
+            }
         }
         return main;
     }
