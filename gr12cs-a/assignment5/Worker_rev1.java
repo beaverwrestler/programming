@@ -15,13 +15,13 @@ public class Worker_rev1 extends Thread{
     public void run() {
         StringTokenizer words = new StringTokenizer (book, "~!@#$%^&*()_+{}|<>:\"?`=[];, ./-\\");
         while (words.hasMoreTokens()) {
-            String temp = words.nextToken().toLowerCase();
+            String temp = words.nextToken();
             try {
                 if (!temp.equals("'")) {
                     if (bookMap.containsKey (temp))
-                        bookMap.put(temp, bookMap.get(temp)+1);
+                        bookMap.put(temp.toLowerCase(), bookMap.get(temp)+1);
                     else
-                        bookMap.put(temp, 1);
+                        bookMap.put(temp.toLowerCase(), 1);
                 }
             }
             catch (NullPointerException e) {}
