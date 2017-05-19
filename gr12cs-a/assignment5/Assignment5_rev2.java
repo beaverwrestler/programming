@@ -1,9 +1,12 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
-import java.io.*;
 
 //programs assumes numbers are also words, lower case is same as uppercase
 
-public class Assignment5_rev1 {
+public class Assignment5_rev2 {
     public static void main (String [] args) throws IOException {
         System.out.println("Most Frequent Words in a File");
         String fileName = getFileName ();
@@ -19,24 +22,37 @@ public class Assignment5_rev1 {
         }
 
         text.close();
-        String finalStr = book.toString().toLowerCase();
-        StringTokenizer words = new StringTokenizer (finalStr, "~!@#$%^&*()_+{}|<>:\"?`=[];, ./-\\");
-        HashMap <String, Word> bookMap = new HashMap <> ();
+        String finalStr = book.toString();
+        String [] parts = splitToFour(finalStr);
 
-        while (words.hasMoreTokens()) {
-            String temp = words.nextToken().toLowerCase();
-            try {
-                if (!temp.equals("'")) {
-                    if (bookMap.containsKey (temp))
+        Worker one = new Worker(parts [0]);     //starting workers
+        one.start();
+        Worker two = new Worker(parts [1]);
+        two.start();
+        Worker three = new Worker(parts [2]);
+        three.start();
+        Worker four = new Worker(parts [3]);
+        four.start();
+
+        while (one.getStatus() == 0 || two.getStatus() == 0 || three.getStatus() == 0 || four.getStatus() == 0) {}
+        //after computation is done
+
+        /*
+        * if (bookMap.containsKey (temp))
                         bookMap.put(temp, bookMap.get(temp).increment());
                     else
                         bookMap.put(temp, new Word (1, temp));
-                }
-            }
-            catch (NullPointerException e) {}
-        }
-        
-        ArrayList <Word> wordArray = new ArrayList <> (bookMap.values());
+                        */
+
+
+
+
+        ArrayList <Word> wordArray = new ArrayList <> ();
+        wordArray.addAll(one.getArray());
+        wordArray.addAll(two.getArray());
+        wordArray.addAll(three.getArray());
+        wordArray.addAll(four.getArray());
+
         Collections.sort(wordArray, new Comparator<Word>() {    //gotta love autocomplete
             @Override
             public int compare(Word o1, Word o2) {
@@ -69,5 +85,19 @@ public class Assignment5_rev1 {
             }
         }
         return name;
+    }
+
+    private static String [] splitToFour (String book) {
+        String [] words = new String [4];
+        for (int j= 4; j>1; j--) {
+            for (int i = book.length()/j; i < book.length(); i++)
+                if (book.charAt(i) == ' ') {
+                    words [(4-j)] = book.substring(0, i);
+                    book = book.substring(i);
+                    break;
+                }
+        }
+        words [3] = book;
+        return words;
     }
 }
