@@ -3,12 +3,10 @@
  * Description: A thread that takes a small portion of the book, tokenizes it, and sorts them into a HashMap
  */
  
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Worker extends Thread{
-    private String book;
+    private String book;    //vars
     private int status = 0;
     private ArrayList<Word> wordArray;
     private HashMap <String, Word> bookMap = new HashMap <> ();

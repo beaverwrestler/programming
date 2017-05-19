@@ -3,14 +3,14 @@
  * Description: Searches text file to find the top 20 most common words, it does this by first inputting the book from a text file and then splitting it to four approximately equal pieces. These are all simultaneously searched ad then compiled once they are all done. An arrayList is then made and organised with the top 20, then printed.
  * 
  * PROGRAM ASSUMPTIONS:    - Numbers are also words
- *                         - lower case is same as uppercase
- *                         - 
+ *                         - lower case is same as upper case
+ *                         - words separated by dashes are considered separate
+ *                         - any form of punctuation separates words (~!@#$%^&*()_+{}|<>:"?`=[];, ./-\)
+ *                         - words with apostrophes (ie. don't) are considered as one word
+ *                         - roman numerals are considered words
 */ 
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.*;
 
 public class Assignment5_rev2 {
@@ -47,7 +47,7 @@ public class Assignment5_rev2 {
         while (one.getStatus() == 0 || two.getStatus() == 0 || three.getStatus() == 0 || four.getStatus() == 0) {}
         //loops until all threads report as being finished
 
-        HashMap <String, Word> bookMapComb = new HashMap <> (one.getArray());
+        HashMap <String, Word> bookMapComb = new HashMap <> (one.getArray());   //makes hashMaps for thread data return
         HashMap <String, Word> bookMapTwo = new HashMap <> (two.getArray());
         HashMap <String, Word> bookMapThree = new HashMap <> (three.getArray());
         HashMap <String, Word> bookMapFour = new HashMap <> (four.getArray());
@@ -66,7 +66,7 @@ public class Assignment5_rev2 {
         });
 
         System.out.println ("Total Time: " + (System.currentTimeMillis() - startTime) + "ms\n20 Most Frequent Words\n");
-        for (int i = 1; i <21 && i < wordArray.size()+1; i++)    //prints the first 20 elements in the list
+        for (int i = 1; i <21 &&  i < wordArray.size()+1; i++)    //prints the first 20 elements in the list
             System.out.println(i + ") \"" + wordArray.get(i-1).getWord() + "\" has " + wordArray.get(i-1).getInsta() + " instances");
         System.out.println("\nProgram is Complete");
     }
