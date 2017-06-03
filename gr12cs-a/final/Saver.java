@@ -6,7 +6,7 @@ public class Saver extends Thread {
         }
     }
     
-    public void letsTakeFive () {
+    private void letsTakeFive () {
         try {
             Thread.sleep(5000);
         }

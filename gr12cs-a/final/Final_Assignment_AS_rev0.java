@@ -19,9 +19,10 @@ public class Final_Assignment_AS_rev0 {
         //    - 
         //REMOVE
         //    - JS/scripts
+        return null;
     }
     
-    public static StringBuilder getHTML (String url) {
+    private static StringBuilder getHTML (String url) {
         StringBuilder html = new StringBuilder();
         try {
             URL web = new URL(url);
@@ -44,6 +45,6 @@ public class Final_Assignment_AS_rev0 {
         if (html.substring(0, 15).toString().equals("<!DOCTYPE html>"))
             return html;            
         else 
-            return "Website linked is not a valid HTML document, cannot search";
+            return null;
     }
 }
