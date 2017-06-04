@@ -4,8 +4,8 @@ public class Citation {
     private String author;
     private String url;
     private String publisher;
-    //do i really need these? or can i just have a string for the whole thing????
-    
+    private String title;
+
     public Citation () {
         
     }
