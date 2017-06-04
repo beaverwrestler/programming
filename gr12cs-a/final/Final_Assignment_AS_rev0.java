@@ -3,13 +3,16 @@ import java.util.*;
 import java.net.*;
 
 public class Final_Assignment_AS_rev0 {
+    private static boolean valid = true;
     public static void main (String [] args) {
         String url = "https://www.google.ca/maps";
         StringBuilder raw = new StringBuilder (getHTML (url));
-        raw = removeIrr (raw);
-        
-        Saver autoSave = new Saver ();
-        autoSave.start();
+        if (valid) {
+            raw = removeIrr (raw);
+
+            Saver autoSave = new Saver ();
+            autoSave.start();
+        }
     }
     
     private static StringBuilder removeIrr (StringBuilder html) {
@@ -19,6 +22,7 @@ public class Final_Assignment_AS_rev0 {
         //    - 
         //REMOVE
         //    - JS/scripts
+        //    - Comments
         return null;
     }
     
@@ -30,7 +34,7 @@ public class Final_Assignment_AS_rev0 {
             connection.connect();
 
             BufferedReader in = new BufferedReader(new InputStreamReader(web.openStream()));
-            String line = "";
+            String line;
             while ((line = in.readLine()) != null) {
                 html.append (line);
             }
@@ -39,12 +43,15 @@ public class Final_Assignment_AS_rev0 {
             System.out.println ("URL format invalid, please try again");
         } 
         catch (IOException e) {   
-            System.out.println ("Could not estalish a conenction, do you have internet connectivity?");
+            System.out.println ("Could not establish a connection, do you have internet connectivity?");
         }  
         
-        if (html.substring(0, 15).toString().equals("<!DOCTYPE html>"))
+        if (html.substring(0, 15).equals("<!DOCTYPE html>"))
             return html;            
-        else 
-            return null;
+        else {
+            System.out.println("HTML document not valid, exiting");
+            valid = false;
+        }
+        return html;
     }
 }
