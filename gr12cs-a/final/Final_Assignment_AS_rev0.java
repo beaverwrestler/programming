@@ -4,8 +4,11 @@ import java.net.*;
 
 public class Final_Assignment_AS_rev0 {
     private static boolean valid = true;
-    public static void main (String [] args) {
-        String url = "https://www.google.ca/maps";
+    public static ArrayList <Citation> citations = new ArrayList <> ();
+    
+    public static void main (String [] args) throws IOException {
+        String url = "https://www.thestar.com/news/world/2017/06/07/several-dead-in-attacks-on-iran-parliament-and-shrine.html";
+        System.out.println("Started...");
         StringBuilder raw = new StringBuilder (getHTML (url));
         if (valid) {
             raw = removeIrr (raw);
@@ -13,16 +16,32 @@ public class Final_Assignment_AS_rev0 {
             Saver autoSave = new Saver ();
             autoSave.start();
         }
+        
+        System.out.println("done");
     }
     
-    private static StringBuilder removeIrr (StringBuilder html) {
+    private static StringBuilder removeIrr (StringBuilder website) throws IOException {
+        String html = website.toString();
         //https://www.w3schools.com/html/html_scripts.asp
         //DO NOT REMOVE
         //    - <title> flags
-        //    - 
         //REMOVE
         //    - JS/scripts
         //    - Comments
+        //    - <style> tags
+        //    - <link> tags
+        //    - <meta> tags
+        //    - <button> tags
+        //    - <a> tags
+        //    - everything besides <head></head> and <body></body>
+        
+        html = html.replaceAll("(<!--(.*?)-->)", " ");
+        html = html.replaceAll("(<style>(.*?)</style>)", " ");
+        html = html.replaceAll("(<script)(.*?)(</script>)", " ");        //doesn't work
+
+        BufferedWriter steve = new BufferedWriter (new FileWriter ("bob.txt"));
+        steve.write(html);
+        
         return null;
     }
     
@@ -52,6 +71,6 @@ public class Final_Assignment_AS_rev0 {
             System.out.println("HTML document not valid, exiting");
             valid = false;
         }
-        return html;
+        return null;
     }
 }
