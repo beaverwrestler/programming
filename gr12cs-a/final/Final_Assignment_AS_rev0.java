@@ -37,7 +37,8 @@ public class Final_Assignment_AS_rev0 {
         
         html = html.replaceAll("(<!--(.*?)-->)", " ");
         html = html.replaceAll("(<style>(.*?)</style>)", " ");
-        html = html.replaceAll("(<script)(.*?)(</script>)", " ");        //doesn't work
+        html = html.replaceAll("(<script)(.*?)(</script>)", " ");
+        //html = html.replaceAll("(<meta)(.*?)(\/>)", " ");
 
         BufferedWriter steve = new BufferedWriter (new FileWriter ("bob.txt"));
         steve.write(html);
@@ -57,6 +58,8 @@ public class Final_Assignment_AS_rev0 {
             while ((line = in.readLine()) != null) {
                 html.append (line);
             }
+            connection.close();
+            in.close();
         } 
         catch (MalformedURLException e) { 
             System.out.println ("URL format invalid, please try again");
