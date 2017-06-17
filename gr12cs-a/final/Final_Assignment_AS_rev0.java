@@ -58,7 +58,6 @@ public class Final_Assignment_AS_rev0 {
             while ((line = in.readLine()) != null) {
                 html.append (line);
             }
-            connection.close();
             in.close();
         } 
         catch (MalformedURLException e) { 

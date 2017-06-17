@@ -24,15 +24,15 @@ public class JFrame_rev0 extends JFrame implements ActionListener {
     private JFrame_rev0 () {
         //start temp
 
-        citations = new ArrayList<>();
-
-        Citation citationOne = new Citation("February 21, 1995", "Bob Joe", "www.donaldtrump.com",
-                "Donald trump is bestest", "Donald Trump is a jerk", "Donald Duck");
-        Citation citationTwo = new Citation("January 12, 2012", "Steve Mobs", "www.theinternet.com",
-                "Pear Company", "The internet is awesome", "Wikipedia");
-
-        citations.add(citationOne);
-        citations.add(citationTwo);
+//        citations = new ArrayList<>();
+//
+//        Citation citationOne = new Citation("February 21, 1995", "Bob Joe", "www.donaldtrump.com",
+//                "Donald trump is bestest", "Donald Trump is a jerk", "Donald Duck");
+//        Citation citationTwo = new Citation("January 12, 2012", "Steve Mobs", "www.theinternet.com",
+//                "Pear Company", "The internet is awesome", "Wikipedia");
+//
+//        citations.add(citationOne);
+//        citations.add(citationTwo);
 
         //end temp
 
